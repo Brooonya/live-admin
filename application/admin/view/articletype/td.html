@@ -1,0 +1,12 @@
+<td><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+<td>{$vo.id}</td>
+<td>{$vo.typename}</td>
+<td>
+    {volist name="group" id="v"}
+    {notempty name="$vo['group_id']"}
+    {if condition="in_array($v['id'],$vo['group_id']) eq true"}
+    {$v.name}
+    {/if}
+    {/notempty}
+    {/volist}
+</td>

@@ -1,0 +1,4 @@
+<td><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+<td>{$vo.message|high_light=$Request.param.message}</td>
+<td>{$vo.send_time|date='Y-m-d H:i:s',###}</td>
+<td>{$vo.is_check}</td>

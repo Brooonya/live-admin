@@ -1,0 +1,11 @@
+<td><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+<td>{$vo.id}</td>
+<td>{$vo.name}</td>
+<td>{$vo.check_msg}</td>
+<td>
+    {volist name="setup" id="v"}
+    {if condition="in_array($v['id'],$vo['check_setup']) eq true"}
+    {$v.menu_name}
+    {/if}
+    {/volist}
+</td>

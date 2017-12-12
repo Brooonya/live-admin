@@ -1,0 +1,71 @@
+{extend name="template/base" /}
+{block name="content"}
+<div class="page-container">
+    <form class="form form-horizontal" id="form" method="post" action="{:\\think\\Request::instance()->baseUrl()}">
+        <input type="hidden" name="id" value="{$vo.id ?? ''}">
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3">名称：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" placeholder="名称" name="name" value="{$vo.name ?? ''}" >
+            </div>
+            <div class="col-xs-3 col-sm-3"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3">check_msg：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <input type="text" class="input-text" placeholder="check_msg" name="check_msg" value="{$vo.check_msg ?? ''}" >
+            </div>
+            <div class="col-xs-3 col-sm-3"></div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3">check_setup：</label>
+
+            <div class="formControls col-xs-6 col-sm-6">
+                {volist name="setup" id="v"}
+                {notempty name="$vo['check_setup']"}
+                {if condition="in_array($v['id'],$vo['check_setup']) eq true"}
+                <input type="checkbox" value="{$v.id}" name="check_setup[]" checked/>{$v.menu_name}&nbsp;&nbsp;
+                {else /}
+                <input type="checkbox" value="{$v.id}" name="check_setup[]" />{$v.menu_name}&nbsp;&nbsp;
+                {/if}
+                {else /}
+                <input type="checkbox" value="{$v.id}" name="check_setup[]" />{$v.menu_name}&nbsp;&nbsp;
+                {/notempty}
+                {/volist}
+            </div>
+            <div class="col-xs-3 col-sm-3"></div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <button type="submit" class="btn btn-primary radius">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+                <button type="button" class="btn btn-default radius ml-20" onClick="layer_close();">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="__LIB__/Validform/5.3.2/Validform.min.js"></script>
+<script>
+    $("#form").Validform({
+        tiptype: 2,
+        ajaxPost: true,
+        showAllError: true,
+        callback: function (ret){
+            parent.location.reload();
+        }
+    });
+
+    $(function () {
+
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+
+    })
+</script>
+{/block}
